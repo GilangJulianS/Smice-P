@@ -1,25 +1,13 @@
 package com.gilang.smice_p;
 
-import android.app.Activity;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
-import android.support.v4.app.Fragment;
+import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.content.Context;
-import android.content.Intent;
-import android.os.Build;
-import android.os.Bundle;
-import android.os.Handler;
-import android.view.Gravity;
-import android.view.LayoutInflater;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.support.v4.widget.DrawerLayout;
-import android.widget.ArrayAdapter;
-import android.widget.TextView;
 
 public class MainActivity extends ActionBarActivity implements
 		NavigationDrawerFragment.NavigationDrawerCallbacks {
@@ -64,10 +52,22 @@ public class MainActivity extends ActionBarActivity implements
 		FragmentManager fragmentManager = getSupportFragmentManager();
 		FragmentTransaction trans = fragmentManager.beginTransaction();
 		if(position == 0)
-			trans.replace(R.id.container, new DownloadFragment()).addToBackStack(null).commit();
+			trans.replace(R.id.container, new MapFragment()).addToBackStack(null).commit();
 		else if(position == 1)
-			trans.replace(R.id.container, MainDataFragment.newInstance(position + 1)).addToBackStack(null).commit();
+			trans.replace(R.id.container, new SessionFragment()).addToBackStack(null).commit();
 		else if(position == 2)
+			trans.replace(R.id.container, MainDataFragment.newInstance(position + 1)).addToBackStack(null).commit();
+		else if(position == 3)
+			trans.replace(R.id.container, new MapFragment()).addToBackStack(null).commit();
+		else if(position == 4)
+			trans.replace(R.id.container, new MapFragment()).addToBackStack(null).commit();
+		else if(position == 5)
+			trans.replace(R.id.container, new DownloadFragment()).addToBackStack(null).commit();
+		else if(position == 6)
+			trans.replace(R.id.container, new MapFragment()).addToBackStack(null).commit();
+		else if(position == 7)
+			trans.replace(R.id.container, new MapFragment()).addToBackStack(null).commit();
+		else if(position == 8)
 			trans.replace(R.id.container, new MapFragment()).addToBackStack(null).commit();
 	}
 

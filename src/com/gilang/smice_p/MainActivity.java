@@ -5,9 +5,12 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -45,16 +48,27 @@ public class MainActivity extends ActionBarActivity implements
 		// Set up the drawer.
 		mNavigationDrawerFragment.setUp(R.id.navigation_drawer,
 				(DrawerLayout) findViewById(R.id.drawer_layout));
+		
+		/*if(savedInstanceState != null){
+			return;
+		}*/
+		
+		DownloadFragment downloadFragment = new DownloadFragment();
+		downloadFragment.setArguments(getIntent().getExtras());
+		getSupportFragmentManager().beginTransaction().replace(R.id.container, downloadFragment).commit();
 	}
 
 	@Override
 	public void onNavigationDrawerItemSelected(int position) {
 		// update the main content by replacing fragments
 		FragmentManager fragmentManager = getSupportFragmentManager();
-		fragmentManager
-				.beginTransaction()
-				.replace(R.id.container,
-						MainDataFragment.newInstance(position + 1)).commit();
+		FragmentTransaction trans = fragmentManager.beginTransaction();
+		if(position == 0)
+			trans.replace(R.id.container, new DownloadFragment()).addToBackStack(null).commit();
+		else if(position == 1)
+			trans.replace(R.id.container, MainDataFragment.newInstance(position + 1)).addToBackStack(null).commit();
+		else if(position == 2)
+			trans.replace(R.id.container, new MapFragment()).addToBackStack(null).commit();
 	}
 
 	public void onSectionAttached(int number) {
@@ -75,7 +89,7 @@ public class MainActivity extends ActionBarActivity implements
 		ActionBar actionBar = getSupportActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
 		actionBar.setDisplayShowTitleEnabled(true);
-		actionBar.setTitle(mTitle);
+		//actionBar.setTitle(mTitle);
 	}
 
 	@Override
@@ -102,4 +116,6 @@ public class MainActivity extends ActionBarActivity implements
 		}
 		return super.onOptionsItemSelected(item);
 	}
+	
+	
 }

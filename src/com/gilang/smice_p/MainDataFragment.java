@@ -8,12 +8,15 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.graphics.Picture;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -24,6 +27,8 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.larvalabs.svgandroid.SVG;
+import com.larvalabs.svgandroid.SVGParser;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -77,7 +82,7 @@ public class MainDataFragment extends Fragment {
 			}
 		});
 		
-		text1 = (TextView)getView().findViewById(R.id.textView1);
+		text1 = (TextView)getView().findViewById(R.id.downloadName);
 	}
 
 	@Override

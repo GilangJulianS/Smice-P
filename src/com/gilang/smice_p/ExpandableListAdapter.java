@@ -5,10 +5,12 @@ import java.util.List;
 
 import android.content.Context;
 import android.graphics.Typeface;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class ExpandableListAdapter extends BaseExpandableListAdapter {
@@ -16,12 +18,14 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 	private Context context;
 	private List<String> listDataHeader;
 	private HashMap<String, List<List<String>>> listDataChild;
+	private FragmentManager fragmentManager;
 	
 	 public ExpandableListAdapter(Context context, List<String> listDataHeader,
-        HashMap<String, List<List<String>>> listChildData) {
+        HashMap<String, List<List<String>>> listChildData, FragmentManager fragmentManager) {
         this.context = context;
         this.listDataHeader = listDataHeader;
         this.listDataChild = listChildData;
+        this.fragmentManager = fragmentManager;
 	 }
 	 
 	@Override
@@ -42,6 +46,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         final String textDownloadDescription = ((List<String>) getChild(groupPosition, childPosition)).get(0);
         final String textDownloadName = ((List<String>) getChild(groupPosition, childPosition)).get(1);
         
+        
         if (convertView == null) {
             LayoutInflater infalInflater = (LayoutInflater) this.context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -49,7 +54,14 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         }
  
         TextView downloadDescription = (TextView) convertView.findViewById(R.id.description);
- 
+        Button downloadButton = (Button) convertView.findViewById(R.id.downloadButton);
+        downloadButton.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				showDialog();
+			}
+		});
         downloadDescription.setText(textDownloadDescription);
         return convertView;
     }
@@ -103,4 +115,9 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         return true;
     }
 
+
+	public void showDialog(){
+        DownloadDialogFragment downloadDialog = new DownloadDialogFragment();
+        downloadDialog.show(fragmentManager, "fragment_edit_name");
+    }
 }

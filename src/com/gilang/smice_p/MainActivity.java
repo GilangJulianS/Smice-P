@@ -116,6 +116,4 @@ public class MainActivity extends ActionBarActivity implements
 		}
 		return super.onOptionsItemSelected(item);
 	}
-	
-	
 }

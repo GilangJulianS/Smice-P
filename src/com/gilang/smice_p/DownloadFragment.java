@@ -8,6 +8,7 @@ import java.util.List;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,7 +36,7 @@ public class DownloadFragment extends Fragment{
         // preparing list data
         prepareListData();
  
-        listAdapter = new ExpandableListAdapter(getActivity(), listDataHeader, listDataChild);
+        listAdapter = new ExpandableListAdapter(getActivity(), listDataHeader, listDataChild, getFragmentManager());
  
         // setting list adapter
         expListView.setAdapter(listAdapter);
@@ -66,6 +67,7 @@ public class DownloadFragment extends Fragment{
  
         listDataChild.put(listDataHeader.get(0), item1); // Header, Child data
         listDataChild.put(listDataHeader.get(1), item2);
+        
     }
     
 	@Override
